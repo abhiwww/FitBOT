@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitBot - Your Personal Fitness Coach</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">💪</div>
+                <h1>FitBot Coach</h1>
+            </div>
+            <div id="authButtons" class="auth-buttons">
+                <button class="auth-btn" id="signInBtn">Sign In</button>
+                <button class="auth-btn" id="signUpBtn">Sign Up</button>
+            </div>
+            <div id="userInfo" class="user-info hidden">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <span id="userName">User</span>
+                <button class="auth-btn" id="logoutBtn">Logout</button>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <!-- Authentication Section -->
+            <div id="authContainer" class="auth-container">
+                <div class="auth-form" id="signInForm">
+                    <h2>Welcome Back!</h2>
+                    <div class="form-group">
+                        <label for="signInEmail">Email</label>
+                        <input type="email" id="signInEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signInPassword">Password</label>
+                        <input type="password" id="signInPassword" placeholder="Enter your password">
+                    </div>
+                    <button class="btn-primary" id="signInSubmit">Sign In</button>
+                    <div class="auth-switch">
+                        Don't have an account? <a id="switchToSignUp">Sign Up</a>
+                    </div>
+                </div>
+                
+                <div class="auth-form hidden" id="signUpForm">
+                    <h2>Create Your Account</h2>
+                    <div class="form-group">
+                        <label for="signUpName">Full Name</label>
+                        <input type="text" id="signUpName" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpEmail">Email</label>
+                        <input type="email" id="signUpEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpPassword">Password</label>
+                        <input type="password" id="signUpPassword" placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpConfirmPassword">Confirm Password</label>
+                        <input type="password" id="signUpConfirmPassword" placeholder="Confirm your password">
+                    </div>
+                    <button class="btn-primary" id="signUpSubmit">Sign Up</button>
+                    <div class="auth-switch">
+                        Already have an account? <a id="switchToSignIn">Sign In</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main App Content (Hidden until authentication) -->
+            <div id="appContent" class="main-content hidden">
+                <div class="sidebar">
+                    <div class="calculator">
+                        <h2>Your Fitness Profile</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Age (years)</label>
+                                <input type="number" id="age" min="10" max="90">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select id="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Height (cm)</label>
+                                <input type="number" id="height">
+                            </div>
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="weight">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Activity Level</label>
+                                <select id="activity">
+                                    <option value="1.2">Sedentary</option>
+                                    <option value="1.375">Light</option>
+                                    <option value="1.55">Moderate</option>
+                                    <option value="1.725">Very Active</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Goal</label>
+                                <select id="goal">
+                                    <option value="loss">Weight Loss</option>
+                                    <option value="gain">Weight Gain</option>
+                                    <option value="maintain">Maintain</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn-primary" id="calcBtn">Calculate & Update</button>
+                        
+                        <div id="resultSummary" class="result-summary"></div>
+                    </div>
+                    
+                    <div class="workout-cards">
+                        <div class="workout-card">
+                            <h4>Quick Workouts</h4>
+                            <ul>
+                                <li>Chest & Triceps</li>
+                                <li>Back & Biceps</li>
+                                <li>Legs & Core</li>
+                                <li>Full Body</li>
+                            </ul>
+                        </div>
+                        <div class="workout-card">
+                            <h4>Diet Plans</h4>
+                            <ul>
+                                <li>Weight Loss</li>
+                                <li>Muscle Gain</li>
+                                <li>Maintenance</li>
+                                <li>Vegetarian</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-area">
+                    <div id="chatWindow" class="chat-window">
+                        <div class="message bot">
+                            Welcome to FitBot Coach! I'm here to help you with workouts, diet plans, and fitness advice. How can I assist you today?
+                            <div class="message-time">Just now</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <div class="quick-action" data-action="chest workout">Chest Workout</div>
+                        <div class="quick-action" data-action="diet plan">Diet Plan</div>
+                        <div class="quick-action" data-action="bmi info">BMI Info</div>
+                        <div class="quick-action" data-action="full body routine">Full Body Routine</div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Ask about workouts, diet, or fitness advice...">
+                        <button id="sendBtn">➤</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Add these elements to your existing index.html -->
+
+<!-- Add theme toggle button in header -->
+<button class="theme-toggle" id="themeToggle">☀️</button>
+
+<!-- Add typing indicator in chat-window -->
+<div id="typingIndicator" class="typing-indicator hidden">
+    <div class="typing-dots">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+    </div>
+</div>
+
+<!-- Add voice button in chat-input -->
+<button class="voice-btn" id="voiceBtn">🎤</button>
+
+<!-- Add progress section in sidebar -->
+<div class="progress-section" id="progressSection">
+    <!-- Progress will be dynamically loaded here -->
+</div>
+
+<!-- Update workout cards to include demo sections -->
+<div class="workout-card">
+    <h4>Quick Workouts</h4>
+    <ul>
+        <li data-exercise="chest">Chest & Triceps</li>
+        <li data-exercise="back">Back & Biceps</li>
+        <li data-exercise="legs">Legs & Core</li>
+        <li data-exercise="fullbody">Full Body</li>
+    </ul>
+    <div class="exercise-demo">
+        <!-- Exercise demos will appear here -->
+    </div>
+</div>
+    <script src="auth.js"></script>
+    <script src="fitness-calculator.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>
